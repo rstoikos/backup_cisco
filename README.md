@@ -1,7 +1,7 @@
-THis scipt connects to some routers defined in a hosts file and takes incremental backups of the config
-while saving also the DIFFS between version.
-As it is now it has  verbose output that can be reduced but have it for debug purposes.
-ALso it very easy to hardcode the hosts file and make it run continuously
+This scipt connects to routers defined in a hosts file and takes incremental backups of the config
+while saving also the DIFFS between versions.
+As it is now it has very verbose output that can be reduced ofurse. I have it as it is for debug purposes.
+Also it very easy to hardcode the hosts file or make it run continuously every hour.
 
 The first time we run the script asks for a file with hostnames or ip addresses on it
 then it connects to the routers, create the necessary folder structure for our backups and takes the first backup

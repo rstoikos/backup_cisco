@@ -45,9 +45,9 @@ def make_dir(file):
         try:
                 os.makedirs(path)
         except OSError:
-                print ("directory %s is there!" % path)
+                print ("\tdirectory %s exists!" % path)
         else:
-                print ("Successfully created the directory %s" % path)
+                print ("\tSuccessfully created the directory %s" % path)
 
 
 def create_file_name():
@@ -72,7 +72,7 @@ def ssh_connect(ip):
 	global output
 	global shell
 	try:
-		print ("\tConnecting to: ", ip)
+		print ("\tConnecting to: ") , ip
         	ssh_client = paramiko.SSHClient()
         	ssh_client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
         	ssh_client.connect(ip, username=username, password=production_password, allow_agent=False, look_for_keys=False)
@@ -104,7 +104,7 @@ def find_diffs():
 	list_of_files = glob.glob(path + "/*[!DIFF]")
 	files = sorted(list_of_files, key=os.path.getmtime) 
 	if len(files) == 1:
-		print("first back up!")
+		print("\tfirst back up!")
 		shell.close
 	#compare files
 	else:
@@ -117,13 +117,13 @@ def find_diffs():
 		for line in difflib.unified_diff(f1, f2):
 			output1 +=line
 		if output1 == '':
-			print('no diffs yet!')
+			print('\tno diffs yet!')
 			shell.close()
 			#no diffs with previous config we can remote that one
 			os.remove(newest_config)
 		else:
-			print("'-' signal indicates new lines")
-			print("'+' signal indicates removed lines")
+			print("\t'-' signal indicates new lines")
+			print("\t'+' signal indicates removed lines")
 			print(output1)
 			#save diffs in file
 			ff = open(filename_diffs, 'a')

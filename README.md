@@ -6,17 +6,18 @@ Also it very easy to hardcode the hosts file and make it run continuously every 
 
 ## Requirements
 
-bcrypt==3.1.7<br/>
-cffi==1.14.0<br/>
-cryptography==2.9<br/>
-enum34==1.1.10<br/>
-ipaddress==1.0.23<br/>
-paramiko==2.7.1<br/>
-pkg-resources==0.0.0<br/>
-pycparser==2.20<br/>
-PyNaCl==1.3.0<br/>
-six==1.14.0<br/>
-
+```
+bcrypt==3.1.7
+cffi==1.14.0
+cryptography==2.9
+enum34==1.1.10
+ipaddress==1.0.23
+paramiko==2.7.1
+pkg-resources==0.0.0
+pycparser==2.20
+PyNaCl==1.3.0
+six==1.14.0
+```
 
 ## Installing
 
@@ -29,12 +30,15 @@ pip install -r requirements.txt
 
 Create a folder e.g netbackup, inside the folder download the script via git and add the text file with the hosts
 separated by a new line e.g<br/>
-R1<br/>
-R2<br/>
-192.168.56.102<br/>
-R4<br/>
 
-It is very important to NOT move the script or the folders that would be created afterwards! As it is now it creates the folders and checks inside them for the configuration files , if you move something it might check in worng folders and mix the configs.<br/> 
+```
+R1
+R2
+192.168.56.102
+R4
+```
+
+It is very important to NOT move the script or the folders that would be created afterwards! As it is now it creates the folders and checks inside them for the configuration files , if you move something it might check in wrong folders and mix the configs.<br/> 
 The first time we run the script asks for a file with hostnames or ip addresses on it
 then it connects to the routers, create the necessary folder structure for our backups and takes the first backup<br/>
 

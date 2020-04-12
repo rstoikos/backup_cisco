@@ -13,17 +13,11 @@ from datetime import datetime
 from sys import argv
 import argparse
 
-global ips
-global cmds
 prompt = '\t# '
-
-
-global username
-global production_password
-global secret
 username = "renos"
 production_password = "cisco"
-secret= "cisco"
+enable_secret= "cisco"
+
 
 def get_ip_addresses_file():
 	global ips
@@ -37,7 +31,7 @@ def get_ip_addresses_file():
 	else:
 		print "\tFile successfully loaded"
 		f.close()
-		#pause()
+
 
 def make_dir(file):
         path = os.path.join(file)
@@ -56,7 +50,6 @@ def create_file_name():
 	global filename_diffs
 	###prefix files for backup
         path = (os.getcwd() + '/' + ip + '/' )
-	os.chdir(path)
         time_now = datetime.now().strftime('%Y-%m-%d_%H:%M:%S')
         filename = ip + "_" + time_now
 	filename_diffs = ip + "_" + time_now + "_DIFF"
@@ -72,6 +65,7 @@ def ssh_connect(ip):
 	global output
 	global shell
 	try:
+		output= " "
 		print ("\tConnecting to: ") , ip
         	ssh_client = paramiko.SSHClient()
         	ssh_client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
@@ -80,7 +74,7 @@ def ssh_connect(ip):
         	time.sleep(1)
         	shell.send('en\n')
         	time.sleep(1)
-        	shell.send(secret)
+        	shell.send(enable_secret)
         	time.sleep(1)
         	shell.send('\n')
         	time.sleep(1)
@@ -91,6 +85,7 @@ def ssh_connect(ip):
         	shell.send('sh run\n')
         	time.sleep(5)
         	output = shell.recv(999999)
+		return True
 	except paramiko.SSHException:
                 print '\tAuthenctication Failure'
         except socket.error:
@@ -134,20 +129,24 @@ def find_diffs():
 check_folders()
 f = open(ips,'r')
 for ip in f.readlines():
-	ip = ip.strip('\n')
-	###prefix files for backup
-	create_file_name()
-	os.chdir(path)
-	###session start
-	ssh_connect(ip)
-	###write current conf in file 
-	ff = open(filename, 'a')
-	ff.write(output.decode("utf-8") )
-	ff.close()
-	###check for diffs
-	find_diffs()
-	path_parent = os.path.dirname(os.getcwd())
-        os.chdir(path_parent)
-
+	if len(ip.strip()) == 0:
+		pass
+	else:
+		ip = ip.strip('\n')
+		###prefix files for backup
+		create_file_name()
+		os.chdir(path)
+		###session start
+		if ssh_connect(ip):
+			###write current conf in file 
+			ff = open(filename, 'a')
+			ff.write(output.decode("utf-8") )
+			ff.close()
+			###check for diffs
+			find_diffs()
+			path_parent = os.path.dirname(os.getcwd())
+       			os.chdir(path_parent)
+		else:
+			path_parent = os.path.dirname(os.getcwd())
+			os.chdir(path_parent)
 f.close()
-

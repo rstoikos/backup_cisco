@@ -199,3 +199,6 @@ root@farm:~/python/netbackup/r2# cat r2_2020-04-09_15:33:38_DIFF
  !
 root@farm:~/python/netbackup/r2# 
 ```
+
+
+[![published](https://static.production.devnetcloud.com/codeexchange/assets/images/devnet-published.svg)](https://developer.cisco.com/codeexchange/github/repo/rstoikos/backup_cisco)

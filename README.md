@@ -21,22 +21,22 @@ six==1.14.0<br/>
 ## Installing
 
 
-git clone https://github.com/rstoikos/backup_cisco.git
+git clone https://github.com/rstoikos/backup_cisco.git<br/>
 pip install -r requirements.txt
 
 
 ## Example
 
 Create a folder e.g netbackup, inside the folder download the script via git and add the text file with the hosts
-separated by a new line e.g
+separated by a new line e.g<br/>
 R1<br/>
 R2<br/>
 192.168.56.102<br/>
 R4<br/>
 
-It is very important to NOT move the script or the folders that would be created afterwards! As it is now it creates the folders and checks inside them for the configuration files , if you move something it would might 
+It is very important to NOT move the script or the folders that would be created afterwards! As it is now it creates the folders and checks inside them for the configuration files , if you move something it might check in worng folders and mix the configs.<br/> 
 The first time we run the script asks for a file with hostnames or ip addresses on it
-then it connects to the routers, create the necessary folder structure for our backups and takes the first backup
+then it connects to the routers, create the necessary folder structure for our backups and takes the first backup<br/>
 
 ```
 root@farm:~/python/netbackup# python backup_cisco.py 
@@ -99,7 +99,7 @@ root@farm:~/python/netbackup#
 
 ```
 
-Running the script now will print the differences in config , save the new config in a new file , and save also the differences in a separate file
+Running the script now will print the differences in config , save the new config in a new file , and save also the differences in a separate file<br/>
 
 ```
 root@farm:~/python/netbackup# python backup_cisco.py 
@@ -151,7 +151,7 @@ root@farm:~/python/netbackup#
 
 ```
 
-Inside folder r2 we now have the new config , and the DIFF file saved
+Inside folder r2 we now have the new config , and the DIFF file saved<br/>
 
 ```
 root@farm:~/python/netbackup# cd r2

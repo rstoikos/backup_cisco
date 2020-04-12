@@ -1,7 +1,40 @@
-This scipt connects to routers or switches, defined in a hosts file line after line, and takes incremental backups of the configs while saving also the DIFFS between versions.
-As it is now it has very verbose output for debug purposes that can be reduced ofcourse.
-Also it very easy to hardcode the hosts file or make it run continuously every hour.
+# Network Devices Configuration backup
 
+This scipt connects to Network devices defined in a hosts file line after line, and takes incremental backups of the configs while saving also the DIFFS between versions.<br/>
+The current version of it has very verbose output for debug purposes that can be easily reduced.
+Also it very easy to hardcode the hosts file and make it run continuously every hour via a cron job.
+
+## Requirements
+
+bcrypt==3.1.7<br/>
+cffi==1.14.0<br/>
+cryptography==2.9<br/>
+enum34==1.1.10<br/>
+ipaddress==1.0.23<br/>
+paramiko==2.7.1<br/>
+pkg-resources==0.0.0<br/>
+pycparser==2.20<br/>
+PyNaCl==1.3.0<br/>
+six==1.14.0<br/>
+
+
+## Installing
+
+
+git clone https://github.com/rstoikos/backup_cisco.git
+pip install -r requirements.txt
+
+
+## Example
+
+Create a folder e.g netbackup, inside the folder download the script via git and add the text file with the hosts
+separated by a new line e.g
+R1<br/>
+R2<br/>
+192.168.56.102<br/>
+R4<br/>
+
+It is very important to NOT move the script or the folders that would be created afterwards! As it is now it creates the folders and checks inside them for the configuration files , if you move something it would might 
 The first time we run the script asks for a file with hostnames or ip addresses on it
 then it connects to the routers, create the necessary folder structure for our backups and takes the first backup
 
